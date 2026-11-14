@@ -94,26 +94,12 @@ st.markdown(
 
 
 def get_connection():
-    try:
-        db_host = st.secrets["DB_HOST"]
-        db_port = int(st.secrets["DB_PORT"])
-        db_user = st.secrets["DB_USER"]
-        db_password = st.secrets["DB_PASSWORD"]
-        db_name = st.secrets["DB_NAME"]
-
-    except Exception:
-        db_host = os.getenv("DB_HOST")
-        db_port = int(os.getenv("DB_PORT", 3306))
-        db_user = os.getenv("DB_USER")
-        db_password = os.getenv("DB_PASSWORD")
-        db_name = os.getenv("DB_NAME")
-
     return pymysql.connect(
-        host=db_host,
-        port=db_port,
-        user=db_user,
-        password=db_password,
-        database=db_name,
+        host=st.secrets["DB_HOST"],
+        port=int(st.secrets["DB_PORT"]),
+        user=st.secrets["DB_USER"],
+        password=st.secrets["DB_PASSWORD"],
+        database=st.secrets["DB_NAME"],
         connect_timeout=10
     )
 
